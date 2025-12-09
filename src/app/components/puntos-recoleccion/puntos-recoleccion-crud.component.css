@@ -1,0 +1,33 @@
+.formulario {
+  margin-bottom: 1rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+mat-form-field {
+  flex: 1 1 200px;
+}
+
+.acciones-form {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tabla {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.busqueda-container {
+  margin: 1rem 0;
+}
+
+.busqueda-field {
+  width: 100%;
+  max-width: 500px;
+}

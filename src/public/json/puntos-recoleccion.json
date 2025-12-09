@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "nombre": "Punto Principal",
+    "direccion": "Av. 9 de Octubre y Malecón",
+    "ciudad": "Guayaquil",
+    "horario": "Lun-Vie 09:00-17:00",
+    "responsable": "Carlos Gómez",
+    "telefonoContacto": "0988888888"
+  }
+]

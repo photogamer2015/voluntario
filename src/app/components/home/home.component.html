@@ -1,0 +1,46 @@
+<app-page-header
+  [titulo]="'Plataforma de Donaciones y Campañas Solidarias'"
+  [subtitulo]="'Explora campañas, inscríbete como voluntario y conoce los puntos de recolección. Recuerda: NO se aceptan donaciones en dinero, solo en especie.'">
+</app-page-header>
+
+<div class="acciones">
+  <button mat-raised-button color="primary" (click)="ir('/campanias')">
+    Ver / Registrar Campañas
+  </button>
+  <button mat-raised-button color="accent" (click)="ir('/campanias-view')">
+    Ver Campañas Activas (Solo Lectura)
+  </button>
+  <button mat-raised-button color="primary" (click)="ir('/voluntarios')">
+    Inscripción de Voluntarios
+  </button>
+  <button mat-raised-button color="accent" (click)="ir('/puntos-recoleccion')">
+    Puntos de Recolección
+  </button>
+  <button mat-raised-button color="primary" (click)="ir('/tipos-donacion')">
+    Tipos de Donación Aceptados
+  </button>
+  <button mat-raised-button color="accent" (click)="ir('/beneficiarios')">
+    Beneficiarios
+  </button>
+</div>
+
+<h2>Campañas activas</h2>
+
+<div class="campanias-grid">
+  <mat-card *ngFor="let c of campaniasActivas" class="campania-card">
+    <mat-card-title>{{ c.nombre }}</mat-card-title>
+    <mat-card-subtitle>
+      Tipo principal: {{ c.tipoDonacionPrincipal }} | Fecha límite: {{ c.fechaLimite }}
+    </mat-card-subtitle>
+    <mat-card-content>
+      <p>{{ c.descripcion }}</p>
+      <p><strong>Ubicación de recolección:</strong> {{ c.ubicacionRecoleccion }}</p>
+      <p>
+        <strong>Acepta:</strong>
+        <span *ngIf="c.aceptaRopa">Ropa </span>
+        <span *ngIf="c.aceptaAlimentos">Alimentos </span>
+        <span *ngIf="c.aceptaJuguetes">Juguetes </span>
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>

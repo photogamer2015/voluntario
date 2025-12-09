@@ -1,0 +1,15 @@
+mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.title-link {
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.2s;
+}
+
+.title-link:hover {
+  opacity: 0.8;
+}

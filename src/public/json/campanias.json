@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "nombre": "Campaña Abriga un Corazón",
+    "descripcion": "Recolección de ropa de abrigo para familias de la sierra.",
+    "tipoDonacionPrincipal": "Ropa",
+    "fechaLimite": "2025-08-31",
+    "ubicacionRecoleccion": "Universidad de Guayaquil - Bloque B",
+    "aceptaRopa": true,
+    "aceptaAlimentos": false,
+    "aceptaJuguetes": false,
+    "activa": true
+  },
+  {
+    "id": 2,
+    "nombre": "Sonrisas en Navidad",
+    "descripcion": "Recolección de juguetes para niños de bajos recursos.",
+    "tipoDonacionPrincipal": "Juguetes",
+    "fechaLimite": "2025-12-20",
+    "ubicacionRecoleccion": "Parque Central",
+    "aceptaRopa": false,
+    "aceptaAlimentos": false,
+    "aceptaJuguetes": true,
+    "activa": true
+  }
+]

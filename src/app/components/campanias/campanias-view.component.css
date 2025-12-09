@@ -1,0 +1,94 @@
+.busqueda-container {
+  margin: 1rem 0 2rem 0;
+}
+
+.busqueda-field {
+  width: 100%;
+  max-width: 500px;
+}
+
+.sin-datos {
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+}
+
+.sin-datos mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1rem;
+  color: #999;
+}
+
+.campanias-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.campania-card {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.campania-card mat-card-content {
+  flex: 1;
+}
+
+.descripcion {
+  margin: 1rem 0;
+  color: #555;
+  line-height: 1.6;
+}
+
+.info-section {
+  margin: 1rem 0;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.info-item mat-icon {
+  color: #1976d2;
+  margin-top: 0.25rem;
+}
+
+.info-item span {
+  flex: 1;
+  line-height: 1.5;
+}
+
+.tipos-aceptados {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.tipos-aceptados strong {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+mat-chip-set {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+mat-card-actions {
+  padding: 0 16px 16px 16px;
+}
+
+@media (max-width: 768px) {
+  .campanias-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

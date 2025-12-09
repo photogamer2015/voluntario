@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "nombre": "Ropa",
+    "descripcion": "Ropa en buen estado para todas las edades.",
+    "soloEspecie": true,
+    "prioridad": "Alta"
+  },
+  {
+    "id": 2,
+    "nombre": "Alimentos no perecibles",
+    "descripcion": "Enlatados, granos, pastas, etc.",
+    "soloEspecie": true,
+    "prioridad": "Alta"
+  }
+]

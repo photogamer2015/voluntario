@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "nombres": "Ana",
+    "apellidos": "Pérez",
+    "email": "ana.perez@example.com",
+    "telefono": "0999999999",
+    "tipoParticipacion": "Recolección",
+    "disponibilidad": "Fines de semana",
+    "activo": true
+  }
+]

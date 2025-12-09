@@ -1,0 +1,153 @@
+<app-page-header
+  [titulo]="'Gestión de Campañas'"
+  [subtitulo]="'Crea, actualiza y elimina campañas solidarias. Solo se aceptan donaciones en especie.'">
+</app-page-header>
+
+<form [formGroup]="form" (ngSubmit)="guardar()" class="formulario">
+
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre de la campaña</mat-label>
+      <input matInput formControlName="nombre" />
+      <mat-error *ngIf="campoInvalido('nombre')">
+        El nombre es obligatorio y debe tener al menos 3 caracteres.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Tipo de donación principal</mat-label>
+      <mat-select formControlName="tipoDonacionPrincipalId">
+        <mat-option *ngFor="let tipo of tiposDonacion" [value]="tipo.id">
+          {{ tipo.nombre }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="campoInvalido('tipoDonacionPrincipalId')">
+        Selecciona un tipo de donación.
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput formControlName="descripcion" rows="3"></textarea>
+      <mat-error *ngIf="campoInvalido('descripcion')">
+        La descripción es obligatoria y debe tener al menos 10 caracteres.
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <mat-label>Fecha límite</mat-label>
+      <input matInput type="date" formControlName="fechaLimite" />
+      <mat-error *ngIf="campoInvalido('fechaLimite')">
+        La fecha límite es obligatoria.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Punto de recolección</mat-label>
+      <mat-select formControlName="puntoRecoleccionId">
+        <mat-option *ngFor="let punto of puntosRecoleccion" [value]="punto.id">
+          {{ punto.nombre }} - {{ punto.ciudad }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="campoInvalido('puntoRecoleccionId')">
+        Selecciona un punto de recolección.
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <mat-label>Beneficiario (opcional)</mat-label>
+      <mat-select formControlName="beneficiarioId">
+        <mat-option [value]="null">Ninguno</mat-option>
+        <mat-option *ngFor="let beneficiario of beneficiarios" [value]="beneficiario.id">
+          {{ beneficiario.nombre }} ({{ beneficiario.tipo }})
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="row checkboxes">
+    <mat-checkbox formControlName="aceptaRopa">Acepta ropa</mat-checkbox>
+    <mat-checkbox formControlName="aceptaAlimentos">Acepta alimentos</mat-checkbox>
+    <mat-checkbox formControlName="aceptaJuguetes">Acepta juguetes</mat-checkbox>
+    <mat-checkbox formControlName="activa">Campaña activa</mat-checkbox>
+  </div>
+
+  <div class="acciones-form">
+    <button mat-raised-button color="primary" type="submit">
+      {{ editMode ? 'Actualizar' : 'Guardar' }}
+    </button>
+    <button mat-button type="button" (click)="cancelar()">Cancelar</button>
+  </div>
+
+</form>
+
+<h2>Listado de campañas</h2>
+
+<div class="busqueda-container">
+  <mat-form-field appearance="outline" class="busqueda-field">
+    <mat-label>Buscar campañas</mat-label>
+    <input matInput (input)="aplicarFiltro($event)" placeholder="Buscar por nombre, descripción, tipo, ubicación..." />
+    <mat-icon matPrefix>search</mat-icon>
+  </mat-form-field>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z2 tabla">
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let c">{{ c.id }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let c">{{ c.nombre }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="tipo">
+    <th mat-header-cell *matHeaderCellDef> Tipo </th>
+    <td mat-cell *matCellDef="let c">
+      {{ c.tipoDonacionPrincipalId ? getTipoDonacionNombre(c.tipoDonacionPrincipalId) : c.tipoDonacionPrincipal }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="fechaLimite">
+    <th mat-header-cell *matHeaderCellDef> Fecha límite </th>
+    <td mat-cell *matCellDef="let c">{{ c.fechaLimite }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="ubicacion">
+    <th mat-header-cell *matHeaderCellDef> Ubicación </th>
+    <td mat-cell *matCellDef="let c">
+      {{ c.puntoRecoleccionId ? getPuntoRecoleccionNombre(c.puntoRecoleccionId) : c.ubicacionRecoleccion }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="activa">
+    <th mat-header-cell *matHeaderCellDef> Activa </th>
+    <td mat-cell *matCellDef="let c">
+      <mat-icon *ngIf="c.activa">check_circle</mat-icon>
+      <mat-icon *ngIf="!c.activa">cancel</mat-icon>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="acciones">
+    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+    <td mat-cell *matCellDef="let c">
+      <button mat-icon-button color="primary" (click)="editar(c)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="eliminar(c)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
